@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class SIDGameRoom {
     public enum GameStatus {
-        WAITING, IN_PROGRESS, FINISHED;
+        WAITING, IN_PROGRESS, FINISHED
     }
     private GameStatus status = GameStatus.WAITING;
     @Id
@@ -58,7 +59,7 @@ public class SIDGameRoom {
 
     public Player getPlayer(Long id){
         for (Player player : players) {
-            if (player.getId() == id) {
+            if (Objects.equals(player.getPhone_number(), id)) {
                 return player;
             }
         }
@@ -69,12 +70,12 @@ public class SIDGameRoom {
     public boolean isFinished(){
         // if any player has no cards, the game is finished
         for (Player player : players) {
-            if (player.getHandcards().size() == 0) {
+            if (player.getHandcards().isEmpty()) {
                 this.setStatus(GameStatus.FINISHED);
             }
         }
         // if the deck is empty, the game is finished
-        if (deck.getCards().size() == 0) {
+        if (deck.getCards().isEmpty()) {
             this.setStatus(GameStatus.FINISHED);
         }
 

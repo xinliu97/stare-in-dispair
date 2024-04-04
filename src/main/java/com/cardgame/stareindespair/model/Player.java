@@ -10,12 +10,12 @@ import java.util.Objects;
 public class Player {
 
     public enum PlayerStatus {
-        READY, WAITING, PLAYING;
+        READY, WAITING, PLAYING
     }
     private PlayerStatus status;
 
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Long id;
-    protected String name;
+    private @Id  Long phone_number;
+    protected String username;
     // players hands card
 
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -25,10 +25,23 @@ public class Player {
     @JoinColumn(name = "room_id")
     private SIDGameRoom gameRoom;
 
+    // email
+    private String email;
+
+    // password
+    private String password;
+
+
     public Player(){}
 
-    public Player(String name){
-        this.name = name;
+    public Player(String username, String email, Long phone_number, String password){
+        this.handcards = new ArrayList<>();
+        this.username = username;
+        this.phone_number = phone_number;
+        this.status = PlayerStatus.WAITING;
+        this.gameRoom = null;
+        this.password = password;
+
     }
 
     public PlayerStatus getStatus() {
@@ -42,20 +55,48 @@ public class Player {
 
 
 
-    public Long getId(){
-        return this.id;
+    public Long getPhone_number(){
+        return this.phone_number;
     }
 
-    public String getName(){
-        return this.name;
+    public String getUsername(){
+        return this.username;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public void setUsername(String name){
+        this.username = name;
     }
 
-    public void setId(Long id){
-        this.id = id;
+    public void setPhone_number(Long id){
+        this.phone_number = id;
+    }
+
+    public void setHandcards(List<SIDCard> handcards) {
+        this.handcards = handcards;
+    }
+
+    public SIDGameRoom getGameRoom() {
+        return gameRoom;
+    }
+
+    public void setGameRoom(SIDGameRoom gameRoom) {
+        this.gameRoom = gameRoom;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -67,22 +108,22 @@ public class Player {
             return false;
         }
         Player player = (Player) o;
-        return Objects.equals(this.id,player.id);
+        return Objects.equals(this.phone_number,player.phone_number);
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(this.id,this.name);
+        return Objects.hash(this.phone_number,this.username);
     }
 
     @Override
     public String toString(){
-        return "This player is:" + this.name;
+        return "This player is:" + this.username;
     }
 
     public void printHandCards(){
 
-        System.out.println("The handcards of " + this.name + " are:");
+        System.out.println("The handcards of " + this.username + " are:");
         for(SIDCard card : handcards){
             System.out.println(card);
             if (handcards.indexOf(card) % 4 == 3) {

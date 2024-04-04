@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class SIDCard implements Card {
     private final SIDSuit suit;
-    private final SIDRank rank;
+    private final SIDRank card_rank;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,12 +20,12 @@ public class SIDCard implements Card {
 
     public SIDCard(SIDSuit suit, SIDRank rank) {
         this.suit = suit;
-        this.rank = rank;
+        this.card_rank = rank;
     }
 
     public SIDCard() {
         this.suit = SIDSuit.UNDEFINED;
-        this.rank = SIDRank.HIGHEST_UNDEFINED;
+        this.card_rank = SIDRank.HIGHEST_UNDEFINED;
     }
 
 
@@ -72,11 +72,11 @@ public class SIDCard implements Card {
 
     @Override
     public SIDRank getRank() {
-        return rank;
+        return card_rank;
     }
 
     @Override
     public String toString() {
-        return String.format("%-10s",rankToString(rank) + suitToString(suit));
+        return String.format("%-10s",rankToString(card_rank) + suitToString(suit));
     }
 }

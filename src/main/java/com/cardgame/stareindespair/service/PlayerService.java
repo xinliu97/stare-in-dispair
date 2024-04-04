@@ -1,5 +1,6 @@
 package com.cardgame.stareindespair.service;
 
+import com.cardgame.stareindespair.dto.RegisterRequest;
 import com.cardgame.stareindespair.model.Player;
 import com.cardgame.stareindespair.repository.PlayerRepository;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,14 @@ public class PlayerService {
         return repository.findAll();
     }
 
-    public Player newPlayer(Player newPlayer){
-        return repository.save(newPlayer);
+    public Player registerNewPlayer(RegisterRequest registerRequest){
+        Player player = new Player();
+        player.setUsername(registerRequest.getUsername());
+        player.setPassword(registerRequest.getPassword()); // 应加密密码
+        player.setEmail(registerRequest.getEmail());
+        player.setPhone_number(Long.valueOf(registerRequest.getPhone_number()));
+        return repository.save(player);
+
     }
 
     public void deletePlayer(Long id){

@@ -15,12 +15,9 @@ class LoadDatabase{
     @Bean
     CommandLineRunner initDatabase(PlayerRepository repository){
         return args -> {
-            Player player1 = repository.save(new Player("Test Player1"));
-            log.info("Preloading " + player1 + " with ID: " + player1.getId());
-            Player player2 = repository.save(new Player("Test Player2"));
-            log.info("Preloading " + player2 + " with ID: " + player2.getId());
-            Player player3 = repository.save(new Player("Test Player3"));
-            log.info("Preloading " + player3 + " with ID: " + player3.getId());
+            Player player1 = repository.save(new Player("String username", "String email", 12342354645L, "String password"));
+            log.info("Preloading " + player1 + " with ID: " + player1.getPhone_number());
+
         };
     }
 

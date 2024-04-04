@@ -2,6 +2,8 @@ package com.cardgame.stareindespair.controller;
 
 import com.cardgame.stareindespair.model.Player;
 import com.cardgame.stareindespair.service.PlayerService;
+import com.cardgame.stareindespair.dto.LoginRequest;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,5 +23,10 @@ public class PlayerController {
     }
 
 
-
+    // Login method, set cross-origin to allow requests from different origins, just for testing purposes
+    @PostMapping("/login")
+    @CrossOrigin(origins = "http://localhost:3000")
+    String login(@RequestBody LoginRequest loginRequest){
+        return "Success";
+    }
 }

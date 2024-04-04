@@ -1,5 +1,6 @@
 package com.cardgame.stareindespair.controller;
 
+import com.cardgame.stareindespair.dto.RegisterRequest;
 import com.cardgame.stareindespair.model.Player;
 import com.cardgame.stareindespair.service.PlayerService;
 import com.cardgame.stareindespair.dto.LoginRequest;
@@ -25,8 +26,16 @@ public class PlayerController {
 
     // Login method, set cross-origin to allow requests from different origins, just for testing purposes
     @PostMapping("/login")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://192.168.0.102:3000"})
     String login(@RequestBody LoginRequest loginRequest){
         return "Success";
+    }
+
+    @PostMapping("/register")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://192.168.0.102:3000"})
+    Player register(@RequestBody RegisterRequest registerRequest){
+
+
+
     }
 }

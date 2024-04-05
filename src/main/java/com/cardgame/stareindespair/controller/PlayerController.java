@@ -26,17 +26,16 @@ public class PlayerController {
     @PostMapping("/login")
     @CrossOrigin(origins = {"http://localhost:3000", "http://192.168.0.102:3000"})
     String login(@RequestBody LoginRequest loginRequest){
-        return "Success";
+        try {
+            return service.loginPlayer(loginRequest);
+        } catch (Exception e) {
+            return "登录失败: " + e.getMessage();
+        }
     }
 
     @PostMapping("/register")
     @CrossOrigin(origins = {"http://localhost:3000", "http://192.168.0.102:3000"})
-    public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest) {
-        try {
-            Player player = service.registerNewPlayer(registerRequest);
-            return ResponseEntity.ok(player); // 成功时返回Player信息
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("注册失败: " + e.getMessage()); // 失败时返回错误信息
-        }
+    public APIResponse register(@RequestBody RegisterRequest registerRequest) {
+        return service.registerNewPlayer(registerRequest);
     }
 }

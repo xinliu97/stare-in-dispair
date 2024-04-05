@@ -59,7 +59,7 @@ public class SIDGameRoom {
 
     public Player getPlayer(Long id){
         for (Player player : players) {
-            if (Objects.equals(player.getPhone_number(), id)) {
+            if (Objects.equals(player.getPhoneNumber(), id)) {
                 return player;
             }
         }

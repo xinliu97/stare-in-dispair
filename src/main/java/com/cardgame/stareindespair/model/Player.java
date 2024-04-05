@@ -1,4 +1,8 @@
 package com.cardgame.stareindespair.model;
+import com.cardgame.stareindespair.utils.StringToLongDeserializer;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 
 
@@ -14,7 +18,11 @@ public class Player {
     }
     private PlayerStatus status;
 
-    private @Id  Long phone_number;
+    @Id
+    @JsonProperty("phone_number") // 用于序列化和反序列化JSON时的名称
+    @JsonDeserialize(using = com.cardgame.stareindespair.utils.StringToLongDeserializer.class)
+    @JsonSerialize(using = com.cardgame.stareindespair.utils.LongToStringSerializer.class)
+    private   Long phoneNumber;
     protected String username;
     // players hands card
 
@@ -29,6 +37,7 @@ public class Player {
     private String email;
 
     // password
+
     private String password;
 
 
@@ -37,7 +46,7 @@ public class Player {
     public Player(String username, String email, Long phone_number, String password){
         this.handcards = new ArrayList<>();
         this.username = username;
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
         this.status = PlayerStatus.WAITING;
         this.gameRoom = null;
         this.password = password;
@@ -55,8 +64,8 @@ public class Player {
 
 
 
-    public Long getPhone_number(){
-        return this.phone_number;
+    public Long getPhoneNumber(){
+        return this.phoneNumber;
     }
 
     public String getUsername(){
@@ -67,8 +76,8 @@ public class Player {
         this.username = name;
     }
 
-    public void setPhone_number(Long id){
-        this.phone_number = id;
+    public void setPhoneNumber(Long id){
+        this.phoneNumber = id;
     }
 
     public void setHandcards(List<SIDCard> handcards) {
@@ -108,12 +117,12 @@ public class Player {
             return false;
         }
         Player player = (Player) o;
-        return Objects.equals(this.phone_number,player.phone_number);
+        return Objects.equals(this.phoneNumber,player.phoneNumber);
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(this.phone_number,this.username);
+        return Objects.hash(this.phoneNumber,this.username);
     }
 
     @Override

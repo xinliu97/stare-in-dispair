@@ -16,7 +16,7 @@ class LoadDatabase{
     CommandLineRunner initDatabase(PlayerRepository repository){
         return args -> {
             Player player1 = repository.save(new Player("String username", "String email", 12342354645L, "String password"));
-            log.info("Preloading " + player1 + " with ID: " + player1.getPhone_number());
+            log.info("Preloading " + player1 + " with ID: " + player1.getPhoneNumber());
 
         };
     }

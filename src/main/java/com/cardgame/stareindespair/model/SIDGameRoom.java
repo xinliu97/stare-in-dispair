@@ -8,6 +8,20 @@ import java.util.Objects;
 
 @Entity
 public class SIDGameRoom {
+    public boolean isGameOver() {
+        return this.status == GameStatus.FINISHED;
+    }
+
+    public boolean getCurrentRound() {
+        return false;
+    }
+
+    public void updateScores(String roundWinner) {
+    }
+
+
+    //get current round
+
     public enum GameStatus {
         WAITING, IN_PROGRESS, FINISHED
     }

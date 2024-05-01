@@ -8,10 +8,15 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Entity
 public class Player {
+
+    public Map<Object, Object> getHand() {
+        return (Map<Object, Object>) handcards;
+    }
 
     public enum PlayerStatus {
         READY, WAITING, PLAYING

@@ -3,6 +3,7 @@ package com.cardgame.stareindespair.repository;
 import com.cardgame.stareindespair.model.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Collection;
 import java.util.Optional;
 
 public interface PlayerRepository extends JpaRepository<Player, Long> {
@@ -13,5 +14,5 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
     Optional<Player> findByPhoneNumberAndPassword(Long phoneNumber, String password);
 
 
-
+    Optional<Player> findByUsername(String username);
 }

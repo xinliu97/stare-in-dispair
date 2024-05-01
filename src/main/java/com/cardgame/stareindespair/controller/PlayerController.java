@@ -38,4 +38,17 @@ public class PlayerController {
     public APIResponse register(@RequestBody RegisterRequest registerRequest) {
         return service.registerNewPlayer(registerRequest);
     }
+
+    @PostMapping("/delete")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://192.168.0.102:3000"})
+    public ResponseEntity<String> deletePlayer(@RequestBody Long id){
+        service.deletePlayer(id);
+        return ResponseEntity.ok("Player deleted successfully.");
+    }
+
+    @PostMapping("/update")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://192.168.0.102:3000"})
+    public APIResponse updatePlayer(@RequestBody Player updatedPlayer){
+        return service.updatePlayer(updatedPlayer);
+    }
 }
